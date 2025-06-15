@@ -108,6 +108,11 @@ class Song:
         return out
 
     def get_overall_fast_text_vector (self):
+
+        # vecs = self.get_fast_text_lyric_vectors()          # list[ndarray]
+        # if not vecs:                                       # all tokens OOV
+        #     return np.zeros(self.model.vector_size, dtype=np.float32)
+
         total =  (sum(vec for vec in self.get_fast_text_lyric_vectors()))
         return total/np.linalg.norm(total)
 
@@ -158,7 +163,7 @@ class Song:
 
 
 def np_dot_product(v1, v2):
-    return np.dot(v1, v2)
+    return float(np.dot(v1, v2))
 
 def generate_avg_vector(vecs):
     if len(vecs) == 0:
